@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.linkBox {
+  border-radius: var(--mantine-radius-sm);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: var(--mantine-spacing-lg);
+  padding: 5px;
+}

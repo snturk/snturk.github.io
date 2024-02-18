@@ -1,0 +1,26 @@
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center;
+  background-color: hsla(0, 0%, 85%, 0.7);
+  backdrop-filter: blur(10px);
+  height: 200px;
+  padding: var(--mantine-spacing-md);
+}
+
+.name {
+  font-weight: bold;
+  color: var(--mantine-color-black);
+  line-height: 1.2;
+  font-size: rem(32px);
+  margin-top: var(--mantine-spacing-xs);
+}
+
+.description {
+  color: var(--mantine-color-black);
+  opacity: 0.7;
+  font-weight: normal;
+}
