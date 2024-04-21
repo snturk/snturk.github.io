@@ -1,20 +1,16 @@
-import Profile from "../components/profile/Profile";
-import { Box, Group } from "@mantine/core";
-import ProjectCarousel from "../components/projects/ProjectCarousel";
-import BlogPostCarousel from "../components/blogposts/BlogPostCarousel";
+import Profile from '../components/profile/Profile';
+import { Box, rem, Stack } from '@mantine/core';
+import BlogPostStack from '../components/blogposts/BlogPostStack';
 
 const Home = () => {
-  return (
-    <Group p={25}>
-      <Profile />
-      <Box mt={20} w={"100%"}>
-        <ProjectCarousel />
-      </Box>
-      <Box mt={20} w={"100%"}>
-        <BlogPostCarousel />
-      </Box>
-    </Group>
-  );
+    return (
+        <Stack py={20} w={'80%'} mx={'auto'} gap={rem(20)}>
+            <Profile />
+            <Box mt={20}>
+                <BlogPostStack />
+            </Box>
+        </Stack>
+    );
 };
 
 export default Home;

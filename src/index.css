@@ -1,10 +1,10 @@
 body {
-  margin: 0;
-  font-family: "Inter";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: url("../src/assets/background_library.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    margin: 0;
+    font-family: 'Inter';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('../src/assets/background_library.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }

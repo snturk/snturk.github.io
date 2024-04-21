@@ -1,40 +1,37 @@
-import { Box, Button, Paper, Text, Title, rem } from "@mantine/core";
-import { BlogPostModel } from "./types";
-import classes from "./BlogPost.module.css";
+import { Box, Title, Stack, Image, Badge, Group } from '@mantine/core';
+import { BlogPostModel } from './types';
+import classes from './BlogPost.module.css';
 
 type BlogPostProps = {
-  blogPost: BlogPostModel;
+    blogPost: BlogPostModel;
 };
 
 const BlogPost = ({ blogPost }: BlogPostProps) => {
-  const { title, description, link } = blogPost;
+    const { title, link, tags } = blogPost;
 
-  return (
-    <Paper className={classes.blogPostCard}>
-      <Box
-        className={classes.image}
-        h={rem(200)}
-        style={{ backgroundImage: `url(${blogPost.image})` }}
-      />
-      <Box>
-        <Title className={classes.name} size="xs">
-          {title}
-        </Title>
-        <Text className={classes.description}>
-          {/* description can be in html format, clear it before rendering */}
-          {description.replace(/<[^>]*>?/gm, "").slice(0, 100)}...
-        </Text>
-      </Box>
-      <Button
-        mt={20}
-        variant="white"
-        color="dark"
-        onClick={() => window.open(link, "_blank")}
-      >
-        View BlogPost
-      </Button>
-    </Paper>
-  );
+    const openLink = () => {
+        window.open(link, '_blank');
+    };
+
+    return (
+        <Group className={classes.blogPostCard} gap={'lg'} justify={'space-between'} onClick={openLink}>
+            <Stack flex={1}>
+                <Title className={classes.name} order={2} ta={'center'}>
+                    {title}
+                </Title>
+                <Group justify={'center'} mt={10}>
+                    {tags.map((tag, index) => (
+                        <Badge key={index} variant={'default'} className={classes.badge}>
+                            {tag}
+                        </Badge>
+                    ))}
+                </Group>
+            </Stack>
+            <Box flex={1} h={'100%'} className={classes.image}>
+                <Image src={blogPost.image} alt={'Blog Post Image'} w={'100%'} h={400} radius={'md'} />
+            </Box>
+        </Group>
+    );
 };
 
 export default BlogPost;
