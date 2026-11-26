@@ -13,7 +13,7 @@ const Profile = () => (
                 <span>Şentürk</span>
             </h1>
             <p className={classes.bio}>
-                &gt; I build software and write about architecture, Android and the craft of building things well.
+                &gt; I build software and write about everything.
             </p>
             <Links />
         </div>
