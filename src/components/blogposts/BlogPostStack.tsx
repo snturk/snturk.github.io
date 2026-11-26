@@ -1,47 +1,46 @@
 import { useEffect, useState } from 'react';
-import { BlogPostModel } from './types';
 import axios from 'axios';
+import { BlogPostModel } from './types';
 import BlogPost from './BlogPost';
-import { Stack, Divider, Skeleton } from '@mantine/core';
 import classes from './BlogPostStack.module.css';
 
+const MEDIUM_API_URL = 'https://mediumpostsapi.vercel.app/api/mcsnturk';
+
 const BlogPostStack = () => {
-    const [blogPosts, setBlogPosts] = useState<BlogPostModel[]>([]);
-
-    const fetchBlogPosts = () => {
-        const githubUrl = 'https://mediumpostsapi.vercel.app/api/mcsnturk';
-        axios.get(githubUrl).then((response) => {
-            const blogs = response.data.dataMedium as BlogPostModel[];
-            setBlogPosts(blogs);
-        });
-    };
+    const [blogPosts, setBlogPosts] = useState<BlogPostModel[] | null>(null);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        blogPosts.sort((a: BlogPostModel, b: BlogPostModel) => {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
-        });
-    }, [blogPosts]);
-
-    useEffect(() => {
-        fetchBlogPosts();
+        axios
+            .get(MEDIUM_API_URL)
+            .then((response) => {
+                const blogs = [...(response.data.dataMedium as BlogPostModel[])];
+                blogs.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                setBlogPosts(blogs);
+            })
+            .catch(() => setError(true));
     }, []);
 
-    return (
-        <>
-            <Stack gap={0} className={classes.blogPostStack} py={'lg'}>
-                {blogPosts.length === 0 && (
-                    <>
-                        <Skeleton height={200} animate />
-                    </>
-                )}
-                {blogPosts.map((blogPost, index) => (
-                    <>
-                        <BlogPost key={'blogPost_' + index} blogPost={blogPost} />
-                        {index !== blogPosts.length - 1 && <Divider key={'divider_' + index} my={'lg'} c={'#000'} />}
-                    </>
+    if (error) {
+        return <div className={`glass ${classes.message}`}>Couldn’t load posts right now.</div>;
+    }
+
+    if (blogPosts === null) {
+        return (
+            <div className={classes.grid}>
+                {[0, 1, 2].map((i) => (
+                    <div key={i} className={`glass ${classes.skeleton}`} />
                 ))}
-            </Stack>
-        </>
+            </div>
+        );
+    }
+
+    return (
+        <div className={classes.grid}>
+            {blogPosts.map((blogPost, index) => (
+                <BlogPost key={blogPost.link} blogPost={blogPost} featured={index === 0} />
+            ))}
+        </div>
     );
 };
 

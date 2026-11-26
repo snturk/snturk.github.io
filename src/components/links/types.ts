@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 export type LinkComponentProps = {
+    label: string;
     linkTo: string;
-    icon: React.ReactNode;
-    backgroundColor: string;
+    icon: ReactNode;
 };

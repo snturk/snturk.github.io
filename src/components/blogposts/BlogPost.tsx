@@ -1,36 +1,41 @@
-import { Box, Title, Stack, Image, Badge, Group } from '@mantine/core';
 import { BlogPostModel } from './types';
 import classes from './BlogPost.module.css';
 
 type BlogPostProps = {
     blogPost: BlogPostModel;
+    featured?: boolean;
 };
 
-const BlogPost = ({ blogPost }: BlogPostProps) => {
-    const { title, link, tags } = blogPost;
+const formatDate = (date: string) => {
+    const d = new Date(date);
+    return isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
 
-    const openLink = () => {
-        window.open(link, '_blank');
-    };
+const BlogPost = ({ blogPost, featured }: BlogPostProps) => {
+    const { title, link, tags, image, date } = blogPost;
 
     return (
-        <Group className={classes.blogPostCard} gap={'lg'} justify={'space-between'} onClick={openLink}>
-            <Stack flex={1}>
-                <Title className={classes.name} order={2} ta={'center'}>
-                    {title}
-                </Title>
-                <Group justify={'center'} mt={10}>
-                    {tags.map((tag, index) => (
-                        <Badge key={index} variant={'default'} className={classes.badge}>
+        <a
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+            className={`glass ${classes.card} ${featured ? classes.featured : ''}`}
+        >
+            <div className={classes.imageWrap}>
+                <img className={classes.image} src={image} alt="" loading="lazy" />
+            </div>
+            <div className={classes.content}>
+                {formatDate(date) && <span className={classes.date}>{formatDate(date)}</span>}
+                <h3 className={classes.title}>{title}</h3>
+                <div className={classes.tags}>
+                    {tags.map((tag) => (
+                        <span key={tag} className={classes.tag}>
                             {tag}
-                        </Badge>
+                        </span>
                     ))}
-                </Group>
-            </Stack>
-            <Box flex={1} h={'100%'} className={classes.image}>
-                <Image src={blogPost.image} alt={'Blog Post Image'} w={'100%'} h={400} radius={'md'} />
-            </Box>
-        </Group>
+                </div>
+            </div>
+        </a>
     );
 };
 

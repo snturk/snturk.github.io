@@ -1,15 +1,17 @@
 import Profile from '../components/profile/Profile';
-import { Box, rem, Stack } from '@mantine/core';
 import BlogPostStack from '../components/blogposts/BlogPostStack';
+import classes from './Home.module.css';
 
 const Home = () => {
     return (
-        <Stack py={20} w={'80%'} mx={'auto'} gap={rem(20)}>
+        <main className={classes.page}>
             <Profile />
-            <Box mt={20}>
+            <section>
+                <h2 className={classes.sectionTitle}>Latest writing</h2>
                 <BlogPostStack />
-            </Box>
-        </Stack>
+            </section>
+            <footer className={classes.footer}>© {new Date().getFullYear()} Muratcan Şentürk</footer>
+        </main>
     );
 };
 
