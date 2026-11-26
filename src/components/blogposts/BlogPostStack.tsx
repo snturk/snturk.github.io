@@ -22,23 +22,17 @@ const BlogPostStack = () => {
     }, []);
 
     if (error) {
-        return <div className={`glass ${classes.message}`}>Couldn’t load posts right now.</div>;
+        return <p className={classes.message}>&gt; couldn’t load posts right now.</p>;
     }
 
     if (blogPosts === null) {
-        return (
-            <div className={classes.grid}>
-                {[0, 1, 2].map((i) => (
-                    <div key={i} className={`glass ${classes.skeleton}`} />
-                ))}
-            </div>
-        );
+        return <p className={classes.message}>&gt; loading posts…</p>;
     }
 
     return (
-        <div className={classes.grid}>
+        <div>
             {blogPosts.map((blogPost, index) => (
-                <BlogPost key={blogPost.link} blogPost={blogPost} featured={index === 0} />
+                <BlogPost key={blogPost.link} blogPost={blogPost} index={index} />
             ))}
         </div>
     );

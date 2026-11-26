@@ -1,57 +1,80 @@
-.profile {
+.hero {
+    position: relative;
+    min-height: 560px;
     display: flex;
-    align-items: center;
-    gap: 32px;
+    align-items: flex-end;
     padding: 32px;
+    overflow: hidden;
+    border: 3px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--ink);
+    background: url('../../assets/background_library.png') center / cover;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(15, 12, 8, 0.8));
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
 }
 
 .avatar {
+    display: block;
     width: 136px;
     height: 136px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid rgba(255, 255, 255, 0.95);
-    box-shadow: 0 8px 24px rgba(30, 25, 20, 0.2);
+    margin-bottom: 20px;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--paper);
 }
 
-.body {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+.tagline {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--blue);
 }
 
 .name {
-    margin: 0;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    margin: 16px 0 14px;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 68px;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
 }
 
-.role {
-    margin: 6px 0 0;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-muted);
+.name span {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 2px 12px 8px;
+    background: var(--blue);
 }
 
-.description {
-    margin: 14px 0 20px;
-    font-size: 16px;
-    line-height: 1.55;
-    color: #3a3a3f;
+.bio {
+    max-width: 400px;
+    margin: 0 0 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.92;
 }
 
-@media (max-width: 600px) {
-    .profile {
-        flex-direction: column;
-        text-align: center;
-        padding: 28px 20px;
-        gap: 20px;
+@media (max-width: 860px) {
+    .hero {
+        min-height: 72vh;
+        padding: 22px;
+        box-shadow: 6px 6px 0 var(--ink);
     }
 
     .name {
-        font-size: 28px;
+        font-size: 46px;
     }
 }

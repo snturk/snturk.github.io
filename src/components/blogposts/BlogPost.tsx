@@ -3,7 +3,7 @@ import classes from './BlogPost.module.css';
 
 type BlogPostProps = {
     blogPost: BlogPostModel;
-    featured?: boolean;
+    index: number;
 };
 
 const formatDate = (date: string) => {
@@ -11,23 +11,16 @@ const formatDate = (date: string) => {
     return isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 };
 
-const BlogPost = ({ blogPost, featured }: BlogPostProps) => {
+const BlogPost = ({ blogPost, index }: BlogPostProps) => {
     const { title, link, tags, image, date } = blogPost;
 
     return (
-        <a
-            href={link}
-            target="_blank"
-            rel="noreferrer"
-            className={`glass ${classes.card} ${featured ? classes.featured : ''}`}
-        >
-            <div className={classes.imageWrap}>
-                <img className={classes.image} src={image} alt="" loading="lazy" />
-            </div>
-            <div className={classes.content}>
-                {formatDate(date) && <span className={classes.date}>{formatDate(date)}</span>}
+        <a className={classes.row} href={link} target="_blank" rel="noreferrer">
+            <span className={classes.number}>{String(index + 1).padStart(2, '0')}</span>
+            <div>
                 <h3 className={classes.title}>{title}</h3>
-                <div className={classes.tags}>
+                <div className={classes.meta}>
+                    {formatDate(date)}
                     {tags.map((tag) => (
                         <span key={tag} className={classes.tag}>
                             {tag}
@@ -35,6 +28,7 @@ const BlogPost = ({ blogPost, featured }: BlogPostProps) => {
                     ))}
                 </div>
             </div>
+            <img className={classes.image} src={image} alt="" loading="lazy" />
         </a>
     );
 };

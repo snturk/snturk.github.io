@@ -1,7 +1,4 @@
-import type { ReactNode } from 'react';
-
-export type LinkComponentProps = {
+export type LinkModel = {
     label: string;
     linkTo: string;
-    icon: ReactNode;
 };
