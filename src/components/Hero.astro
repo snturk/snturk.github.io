@@ -1,0 +1,110 @@
+---
+import avatar from '../assets/avatar.jpg';
+import bg from '../assets/background_library.png';
+
+const links = [
+    { label: 'medium ↗', href: 'https://medium.com/@mcsnturk', primary: true },
+    { label: 'github', href: 'https://github.com/snturk' },
+    { label: 'linkedin', href: 'https://www.linkedin.com/in/snturk' },
+];
+---
+
+<header class="hero" style={`background-image: url(${bg.src})`}>
+    <div class="content">
+        <img class="avatar" src={avatar.src} width="136" height="136" alt="Illustrated avatar of Muratcan Şentürk" />
+        <span class="tagline">~/snturk · software engineer</span>
+        <h1 class="name">Muratcan Şentürk</h1>
+        <p class="bio">&gt; I build software and write about everything.</p>
+        <nav class="links">
+            {
+                links.map((l) => (
+                    <a class:list={['btn', { primary: l.primary }]} href={l.href} target="_blank" rel="noreferrer">
+                        {l.label}
+                    </a>
+                ))
+            }
+        </nav>
+    </div>
+</header>
+
+<style>
+    .hero {
+        position: relative;
+        min-height: 560px;
+        display: flex;
+        align-items: flex-end;
+        padding: 32px;
+        overflow: hidden;
+        border: 3px solid var(--ink);
+        box-shadow: 10px 10px 0 var(--ink);
+        background-position: center;
+        background-size: cover;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(15, 12, 8, 0.8));
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+    }
+
+    .avatar {
+        display: block;
+        width: 136px;
+        height: 136px;
+        margin-bottom: 20px;
+        border: 3px solid var(--ink);
+        box-shadow: 6px 6px 0 var(--paper);
+    }
+
+    .tagline {
+        display: inline-block;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: var(--blue);
+    }
+
+    .name {
+        margin: 16px 0 14px;
+        font-family: var(--serif);
+        font-weight: 900;
+        font-size: 68px;
+        line-height: 1;
+        letter-spacing: -0.025em;
+    }
+
+    .bio {
+        max-width: 400px;
+        margin: 0 0 22px;
+        font-size: 14px;
+        line-height: 1.7;
+        opacity: 0.92;
+    }
+
+    .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    @media (max-width: 860px) {
+        .hero {
+            min-height: 72vh;
+            padding: 22px;
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+
+        .name {
+            font-size: 46px;
+        }
+    }
+</style>
