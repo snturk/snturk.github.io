@@ -7,11 +7,7 @@ const Profile = () => (
         <div className={classes.content}>
             <img className={classes.avatar} src={avatar} alt="Illustrated avatar of Muratcan Şentürk" />
             <span className={classes.tagline}>~/snturk · software engineer</span>
-            <h1 className={classes.name}>
-                Muratcan
-                <br />
-                <span>Şentürk</span>
-            </h1>
+            <h1 className={classes.name}>Muratcan Şentürk</h1>
             <p className={classes.bio}>
                 &gt; I build software and write about everything.
             </p>
